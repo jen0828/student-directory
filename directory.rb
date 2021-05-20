@@ -38,7 +38,8 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
-  puts "9. Exit"
+  puts "4. Load the list from student.csv"
+  puts "9. Exit" # 9 because we'll be adding more items
 end
 
 def show_students
@@ -75,6 +76,15 @@ end
 
 def print_footer
   puts "Overall, we have #{@students.count} great students"
+end
+
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+  name, cohort = line.chomp.split(',')
+    @students << {name: name, cohort: cohort.to_sym}
+  end
+  file.close
 end
 
 interactive_menu
